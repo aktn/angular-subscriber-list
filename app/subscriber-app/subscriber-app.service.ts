@@ -49,4 +49,19 @@ export class SubscriberAppService{
             .map((response: Response) => response.json())
             .catch((error: any) => Observable.throw(error.json()));
     }
+
+    createSubscriber(subscriber: Subscriber): Observable<Subscriber>{
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+
+        let options = new RequestOptions({
+            headers : headers
+        });
+
+        return this.http    
+            .post(`${SUBSCRIBER_API}`, subscriber, options)
+            .map((response: Response) => response.json())
+            .catch((error: any) => Observable.throw(error.json()));
+    }
 }

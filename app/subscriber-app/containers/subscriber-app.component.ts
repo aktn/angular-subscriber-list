@@ -6,7 +6,9 @@ import { SubscriberAppService } from '../subscriber-app.service';
     selector: 'subscriber-app',
     styleUrls: ['subscriber-app.component.scss'],
     template:`
-    <subscriber-form></subscriber-form>
+    <subscriber-form
+        (onSubmit)="handleOnSubmit($event)">
+    </subscriber-form>
     <subscriber-list 
         *ngFor="let subscriber of subscribers;"
         [detail]="subscriber"
@@ -50,5 +52,11 @@ export class SubscriberAppComponent implements OnInit{
                 return subscriber;
             });
         })
+    }
+
+    handleOnSubmit(create: Subscriber){
+        this.subscriberService.createSubscriber(create).subscribe((data: Subscriber)=>{
+            this.subscribers.push(create);
+        });
     }
 }
