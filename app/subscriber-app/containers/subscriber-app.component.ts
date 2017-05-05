@@ -8,7 +8,9 @@ import { Subscriber } from '../models/subscriber.interface';
     <subscriber-form></subscriber-form>
     <subscriber-list 
         *ngFor="let subscriber of subscribers;"
-        [detail]="subscriber">
+        [detail]="subscriber"
+        (remove)="handleRemove($event)"
+        (edit)="handleEmit($event)">
     </subscriber-list>
     `
 })
@@ -21,4 +23,12 @@ export class SubscriberAppComponent{
         name: "Michael",
         email:"michael.gmail.com"
     }];   
+
+    handleRemove(subscriber) {
+        console.log(subscriber);
+    }
+
+    handleEmit(subscriber){
+        console.log(subscriber);
+    }
 }
