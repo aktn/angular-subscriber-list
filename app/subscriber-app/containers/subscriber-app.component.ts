@@ -29,11 +29,14 @@ export class SubscriberAppComponent implements OnInit{
     subscribers: Subscriber[] = [];   
 
     handleRemove(remove: Subscriber) {
-        //Filtering particular subscriber from the array of subscribers
-         this.subscribers = this.subscribers.filter((subscriber: Subscriber)=>{
-             //if id matches
-            return subscriber.id !== remove.id; 
-        })
+        this.subscriberService.deleteSubscriber(remove)
+        .subscribe((data: Subscriber)=>{
+            //Filtering particular subscriber from the array of subscribers
+            this.subscribers = this.subscribers.filter((subscriber: Subscriber)=>{
+                //if id matches
+                return subscriber.id !== remove.id; 
+             });
+         })
     }
 
     handleEdit(edit: Subscriber){

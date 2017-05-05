@@ -6,6 +6,8 @@ import 'rxjs/add/operator/catch';
 import 'rxjs/add/observable/throw';
 import { Subscriber } from './models/subscriber.interface';
 
+const SUBSCRIBER_API: string = '/api/subscribers';
+
 @Injectable()
 export class SubscriberAppService{
     constructor(private http:Http){}
@@ -21,6 +23,13 @@ export class SubscriberAppService{
 
         return this.http
             .get('/api/subscribers', options)
+            .map((response: Response) => response.json())
+            .catch((error: any) => Observable.throw(error.json()));
+    }
+
+    deleteSubscriber(subscriber: Subscriber): Observable<Subscriber> {
+        return this.http
+            .delete(`${SUBSCRIBER_API}/${subscriber.id}`)
             .map((response: Response) => response.json())
             .catch((error: any) => Observable.throw(error.json()));
     }
