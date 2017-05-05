@@ -10,25 +10,39 @@ import { Subscriber } from '../models/subscriber.interface';
         *ngFor="let subscriber of subscribers;"
         [detail]="subscriber"
         (remove)="handleRemove($event)"
-        (edit)="handleEmit($event)">
+        (edit)="handleEdit($event)">
     </subscriber-list>
     `
 })
 
 export class SubscriberAppComponent{
     subscribers: Subscriber[] = [{
+        id: 1,
         name: "Joe",
         email: "joe@yahoo.com"
     },{
+        id: 2,
         name: "Michael",
         email:"michael.gmail.com"
     }];   
 
-    handleRemove(subscriber) {
-        console.log(subscriber);
+    handleRemove(remove: Subscriber) {
+        //Filtering particular subscriber from the array of subscribers
+         this.subscribers = this.subscribers.filter((subscriber: Subscriber)=>{
+             //if id matches
+            return subscriber.id !== remove.id; 
+        })
     }
 
-    handleEmit(subscriber){
-        console.log(subscriber);
+    handleEdit(edit: Subscriber){
+       this.subscribers = this.subscribers.map((subscriber: Subscriber)=>{
+        //Check if id identical
+        if(subscriber.id === edit.id){
+            //Overiding orignial data with the new changes
+            subscriber = Object.assign({}, subscriber, edit);
+        }
+        return subscriber;
+       });
+       
     }
 }

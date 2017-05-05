@@ -1,4 +1,5 @@
 export interface Subscriber{
     name: string,
-    email: string
+    email: string,
+    id: number
 }

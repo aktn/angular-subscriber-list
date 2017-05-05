@@ -11,7 +11,7 @@ import { Subscriber } from '../../models/subscriber.interface';
                     <input type="text" [value]="detail.name" (input)="onNameChange(name.value)" #name>
                 </div>
                 <div>
-                    <input type="text" [value]="detail.email" (input)="onNameChange(email.value)" #email>
+                    <input type="text" [value]="detail.email" (input)="onEmailChange(email.value)" #email>
                 </div>
             </div>
             <div *ngIf="!editing">
@@ -33,6 +33,14 @@ export class SubscriberListComponent{
     //Data input from the parent container
     @Input()
     detail: Subscriber;
+
+    onNameChange(value: string) {
+        this.detail.name = value;
+    }
+
+    onEmailChange(value: string) {
+        this.detail.email = value;
+    }
 
     //Editing subscriber details
     //Text form should be displayed when in edit mode
@@ -57,5 +65,4 @@ export class SubscriberListComponent{
     onRemove(){
         this.remove.emit(this.detail);
     }
-
 }
