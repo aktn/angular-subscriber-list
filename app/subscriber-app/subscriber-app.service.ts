@@ -27,6 +27,22 @@ export class SubscriberAppService{
             .catch((error: any) => Observable.throw(error.json()));
     }
 
+    updateSubscriber(subscriber: Subscriber): Observable<Subscriber> {
+        
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+
+        let options = new RequestOptions({
+            headers : headers
+        });
+
+        return this.http
+            .put(`${SUBSCRIBER_API}/${subscriber.id}`, subscriber, options)
+            .map((response: Response)=> response.json())
+            .catch((error: any)=> Observable.throw(error.json()));
+    }
+
     deleteSubscriber(subscriber: Subscriber): Observable<Subscriber> {
         return this.http
             .delete(`${SUBSCRIBER_API}/${subscriber.id}`)

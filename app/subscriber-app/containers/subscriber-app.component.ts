@@ -40,14 +40,15 @@ export class SubscriberAppComponent implements OnInit{
     }
 
     handleEdit(edit: Subscriber){
-       this.subscribers = this.subscribers.map((subscriber: Subscriber)=>{
-        //Check if id identical
-        if(subscriber.id === edit.id){
-            //Overiding orignial data with the new changes
-            subscriber = Object.assign({}, subscriber, edit);
-        }
-        return subscriber;
-       });
-       
+        this.subscriberService.updateSubscriber(edit).subscribe((data: Subscriber)=>{
+            this.subscribers = this.subscribers.map((subscriber: Subscriber)=>{
+                //Check if id identical
+                if(subscriber.id === edit.id){
+                    //Overiding orignial data with the new changes
+                    subscriber = Object.assign({}, subscriber, edit);
+                }
+                return subscriber;
+            });
+        })
     }
 }
