@@ -1,1 +1,13 @@
-{}
+{
+  "subscribers": [
+    {
+      "id": 1,
+      "name": "Joe",
+      "email": "joe@yahoo.com"
+    },{
+      "id": 2,
+      "name": "Michael",
+      "email": "michael@gmail.com"
+    }
+  ]
+}

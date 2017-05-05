@@ -8,6 +8,9 @@ import { SubscriberAppComponent } from './containers/subscriber-app.component';
 import { SubscriberListComponent } from './components/subscriber-list/subscriber-list.component';
 import { SubscriberFormComponent } from './components/subscriber-form/subscriber-form.component';
 
+//Services
+import { SubscriberAppService } from './subscriber-app.service';
+
 @NgModule({
     declarations:[
         SubscriberAppComponent,
@@ -21,6 +24,9 @@ import { SubscriberFormComponent } from './components/subscriber-form/subscriber
     ],
     exports:[
         SubscriberAppComponent
+    ],
+    providers:[
+        SubscriberAppService
     ]
 })
 

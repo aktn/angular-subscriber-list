@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { Subscriber } from '../models/subscriber.interface';
+import { SubscriberAppService } from '../subscriber-app.service';
 
 @Component({
     selector: 'subscriber-app',
@@ -15,16 +16,17 @@ import { Subscriber } from '../models/subscriber.interface';
     `
 })
 
-export class SubscriberAppComponent{
-    subscribers: Subscriber[] = [{
-        id: 1,
-        name: "Joe",
-        email: "joe@yahoo.com"
-    },{
-        id: 2,
-        name: "Michael",
-        email:"michael.gmail.com"
-    }];   
+export class SubscriberAppComponent implements OnInit{
+    
+    //Dependecy Injected Services
+    constructor(private subscriberService: SubscriberAppService){}
+    
+    //Subscribing data from the service
+    ngOnInit(){
+        this.subscriberService.getSubscribers().subscribe((data:Subscriber[])=>this.subscribers=data);
+    }
+
+    subscribers: Subscriber[] = [];   
 
     handleRemove(remove: Subscriber) {
         //Filtering particular subscriber from the array of subscribers
