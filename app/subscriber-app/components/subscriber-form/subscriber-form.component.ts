@@ -12,7 +12,7 @@ import { Subscriber } from '../../models/subscriber.interface';
                    #name="ngModel" 
                    ngModel 
                    required>
-            <div *ngIf="name.errors?.required && name.dirty">Name Required</div>
+            
 
             <input type="text" 
                    name="email" 
@@ -20,11 +20,16 @@ import { Subscriber } from '../../models/subscriber.interface';
                    #email="ngModel" 
                    ngModel 
                    required >
-            <div *ngIf="email.errors?.required && email.dirty">Email Required</div>
+            
 
             <button type="submit" [disabled]="!form.valid">Add</button>
             <button>Export</button>
-            {{ form.value | json }}
+
+            <div>
+                <div *ngIf="name.errors?.required && name.dirty" class="error">Name Required</div>
+                <div *ngIf="email.errors?.required && email.dirty" class="error">Email Required</div>
+            </div>
+            
         </form>
     `
 })

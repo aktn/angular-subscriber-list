@@ -5,25 +5,33 @@ import { Subscriber } from '../../models/subscriber.interface';
     selector: 'subscriber-list',
     styleUrls: ['subscriber-list.component.scss'],
     template:`
-        <div>
-            <div *ngIf="editing">
-                <div>
-                    <input type="text" [value]="detail.name" (input)="onNameChange(name.value)" #name>
+        <div class="subscriber-list">
+            <div class="row">
+                
+                <div *ngIf="editing">
+                    <div class="col-md-4">
+                        <input type="text" [value]="detail.name" (input)="onNameChange(name.value)" #name>
+                    </div>
+                    <div class="col-md-4">
+                        <input type="text" [value]="detail.email" (input)="onEmailChange(email.value)" #email>
+                    </div>
                 </div>
-                <div>
-                    <input type="text" [value]="detail.email" (input)="onEmailChange(email.value)" #email>
+                    
+                <div *ngIf="!editing">
+                    <div class="col-md-4">
+                        {{ detail.name }} 
+                    </div>
+                    <div class="col-md-4">
+                        {{ detail.email }}
+                    </div>
                 </div>
+
+                <div class="col-md-4">
+                    <button (click)="toggleEdit()">{{ editing ? 'Done' : 'Edit' }}</button>
+                    <button (click)="onRemove()">Delete</button>
+                </div>
+
             </div>
-            <div *ngIf="!editing">
-                <div>
-                    {{ detail.name }} 
-                </div>
-                <div>
-                    {{ detail.email }}
-                </div>
-            </div>
-            <button (click)="toggleEdit()">{{ editing ? 'Done' : 'Edit' }}</button>
-            <button (click)="onRemove()">Remove</button>
         </div>
     `
 })
