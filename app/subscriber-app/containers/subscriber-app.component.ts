@@ -9,6 +9,9 @@ import { SubscriberAppService } from '../subscriber-app.service';
     <subscriber-form
         (onSubmit)="handleOnSubmit($event)">
     </subscriber-form>
+    <div class="count">
+        Total Subscribers : {{ subscribers?.length }}
+    </div>
     <subscriber-list 
         *ngFor="let subscriber of subscribers;"
         [detail]="subscriber"
@@ -56,7 +59,11 @@ export class SubscriberAppComponent implements OnInit{
 
     handleOnSubmit(create: Subscriber){
         this.subscriberService.createSubscriber(create).subscribe((data: Subscriber)=>{
-            this.subscribers.push(create);
+           this.subscriberService.getSubscribers().subscribe((data:Subscriber[])=>this.subscribers=data);
+           return true;
         });
     }
+
+    
 }
+

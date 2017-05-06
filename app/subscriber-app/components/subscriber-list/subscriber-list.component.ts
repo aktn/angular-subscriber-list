@@ -1,4 +1,4 @@
-import { Component, Input, EventEmitter, Output } from '@angular/core';
+import { Component, Input, EventEmitter, Output, OnChanges } from '@angular/core';
 import { Subscriber } from '../../models/subscriber.interface';
 
 @Component({
@@ -19,10 +19,10 @@ import { Subscriber } from '../../models/subscriber.interface';
                     
                 <div *ngIf="!editing">
                     <div class="col-md-4">
-                        {{ detail.name }} 
+                        {{ detail?.name }} 
                     </div>
                     <div class="col-md-4">
-                        {{ detail.email }}
+                        {{ detail?.email }}
                     </div>
                 </div>
 
@@ -36,11 +36,17 @@ import { Subscriber } from '../../models/subscriber.interface';
     `
 })
 
-export class SubscriberListComponent{
+export class SubscriberListComponent implements OnChanges{
     constructor(){}
     //Data input from the parent container
     @Input()
     detail: Subscriber;
+
+    ngOnChanges(changes) {
+        if (changes.detail) {
+            this.detail = Object.assign({}, changes.detail.currentValue);
+        }
+    }
 
     onNameChange(value: string) {
         this.detail.name = value;

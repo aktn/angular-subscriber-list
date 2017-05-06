@@ -5,7 +5,7 @@ import { Subscriber } from '../../models/subscriber.interface';
     selector: 'subscriber-form',
     styleUrls: ['subscriber-form.component.scss'],
     template:`
-        <form #form="ngForm" (ngSubmit)="handleSubmit(form.value,form.valid)" novalidate>
+        <form #form="ngForm" (ngSubmit)="handleSubmit(form.value,form.valid); form.reset()" novalidate>
             <input type="text" 
                    name="name" 
                    placeholder="name" 
@@ -19,7 +19,8 @@ import { Subscriber } from '../../models/subscriber.interface';
                    placeholder="email" 
                    #email="ngModel" 
                    ngModel 
-                   required >
+                   required
+                   pattern="[^ @]*@[^ @]*">
             
 
             <button type="submit" [disabled]="!form.valid">Add</button>
@@ -27,10 +28,14 @@ import { Subscriber } from '../../models/subscriber.interface';
 
             <div>
                 <div *ngIf="name.errors?.required && name.dirty" class="error">Name Required</div>
-                <div *ngIf="email.errors?.required && email.dirty" class="error">Email Required</div>
+                <div>
+                    <div *ngIf="email.errors?.required && email.dirty" class="error">Email Required></div>
+                    <div *ngIf="email.errors?.pattern && email.touched" class="error">Invalid Email Format</div>
+                </div> 
             </div>
             
         </form>
+       
     `
 })
 
@@ -44,5 +49,6 @@ export class SubscriberFormComponent{
         if(isValid){
             this.onSubmit.emit(subscriber);
         }
+       // this.form.reset();
     }
 }
