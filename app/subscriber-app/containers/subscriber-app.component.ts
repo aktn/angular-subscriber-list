@@ -7,7 +7,8 @@ import { SubscriberAppService } from '../subscriber-app.service';
     styleUrls: ['subscriber-app.component.scss'],
     template:`
     <subscriber-form
-        (onSubmit)="handleOnSubmit($event)">
+        (onSubmit)="handleOnSubmit($event)"
+        (export)="handleExportCSV()">
     </subscriber-form>
     <div class="count">
         Total Subscribers : {{ subscribers?.length }}
@@ -64,6 +65,9 @@ export class SubscriberAppComponent implements OnInit{
         });
     }
 
+    handleExportCSV(){
+        this.subscriberService.exportCSV();
+    }
     
 }
 

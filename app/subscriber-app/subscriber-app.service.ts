@@ -64,4 +64,23 @@ export class SubscriberAppService{
             .map((response: Response) => response.json())
             .catch((error: any) => Observable.throw(error.json()));
     }
+    
+    //To export data into php file
+    exportCSV(): Observable<Subscriber[]> {
+        let headers = new Headers({
+            'Content-Type': 'application/json'
+        });
+
+        let options = new RequestOptions({
+            headers : headers
+        });
+
+        const obj = { name: 'gabriel', age: 20 };
+        const body = 'data=' + JSON.stringify(obj);
+
+        return this.http
+            .get('http://localhost:9000/csv.php')
+            .map((response:Response) => response.json())
+            .catch((error: any)=> Observable.throw(error.json()));
+    }
 }

@@ -24,7 +24,7 @@ import { Subscriber } from '../../models/subscriber.interface';
             
 
             <button type="submit" [disabled]="!form.valid">Add</button>
-            <button>Export</button>
+            <button (click)="exportCSV()">Export</button>
 
             <div>
                 <div *ngIf="name.errors?.required && name.dirty" class="error">Name Required</div>
@@ -50,5 +50,12 @@ export class SubscriberFormComponent{
             this.onSubmit.emit(subscriber);
         }
        // this.form.reset();
+    }
+
+    @Output()
+    export = new EventEmitter<any>();
+    
+    exportCSV(){
+        this.export.emit(event);
     }
 }
