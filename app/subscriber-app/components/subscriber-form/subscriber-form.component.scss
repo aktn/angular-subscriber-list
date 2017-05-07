@@ -5,11 +5,24 @@
   display: block;
 }
 .error {
-  color: #B52D30;
+  background: #e82041;
+  border-radius: 5px 5px 5px 5px;
+  color: #fff;
   font-weight: 500;
   font-size: 15px;
-  border-radius: 0 0 3px 3px;
-  line-height: 1;
+  line-height: 1.5;
   padding: 6px 10px;
-  margin-top: 5px;
+  margin-top: 10px;
+}
+button {
+  background: #9E61C8;
+  border-radius: 0;
+  line-height: 1.5;
+  margin-left:10px;
+  padding: 5px 10px;
+  color: #fff;
+  font-weight: 500;
+  &:disabled {
+    background: #96a3b7;
+  }
 }
